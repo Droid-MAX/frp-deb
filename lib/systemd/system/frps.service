@@ -1,0 +1,15 @@
+[Unit]
+Description=Frp server daemon
+After=network.target syslog.target
+
+[Service]
+Type=simple
+PIDFile=/var/run/frps.pid
+ExecStart=/usr/bin/frps -c /etc/frp/frps.ini
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target

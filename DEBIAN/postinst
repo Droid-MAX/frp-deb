@@ -1,0 +1,12 @@
+#!/bin/bash
+systemctl daemon-reload
+echo "Enabling Frp server daemon service."
+if [[ -f "/lib/systemd/system/frps.service" ]]; then
+    systemctl enable frps.service
+fi
+if [[ -f "/etc/init.d/frps" ]]; then
+    update-rc.d frps defaults
+fi
+sed -i "s/log\_file\ \=\ \.\/frps\.log/log\_file\ \=\ \/var\/log\/frp\/frps\.log/g" "/etc/frp/frps.ini"
+sed -i "s/log\_file\ \=\ \.\/frpc\.log/log\_file\ \=\ \/var\/log\/frp\/frpc\.log/g" "/etc/frp/frpc.ini"
+mkdir -p /var/log/frp

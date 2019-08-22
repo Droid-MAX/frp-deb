@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Shutting down Frp server daemon service."
+if [[ -f "/lib/systemd/system/frps.service" ]] || [[ -f "/etc/systemd/system/frps.service" ]]; then
+    systemctl stop frps
+elif [[ -f "/etc/init.d/frps" ]]; then
+    service frps stop
+fi

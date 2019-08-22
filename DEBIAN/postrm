@@ -1,0 +1,3 @@
+#!/bin/bash
+systemctl daemon-reload
+rm -rf /var/log/frp /var/run/frpc.pid /var/run/frps.pid
