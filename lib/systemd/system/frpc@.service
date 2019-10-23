@@ -1,0 +1,15 @@
+[Unit]
+Description=Frp client daemon
+After=network.target syslog.target
+
+[Service]
+Type=simple
+PIDFile=/var/run/frpc.pid
+ExecStart=/usr/bin/frpc -c /etc/frp/%i.ini
+ExecReload=/usr/bin/frpc reload -c /etc/frp/%i.ini
+KillMode=process
+Restart=always
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
